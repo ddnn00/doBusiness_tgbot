@@ -6,33 +6,33 @@ const dbConfig = {
   user: "grek7771_testbd",
   password: "testbd",
   database: "grek7771_testbd",
-}
+};
 
 let connection = null;
 function dbConnectionHandler() {
   connection = mysql.createConnection(dbConfig);
 
-  connection.connect(function(error) {
-    if(error) {
-      console.log('Database connection failed:', error);
+  connection.connect(function (error) {
+    if (error) {
+      console.log("Database connection failed:", error);
       setTimeout(dbConnectionHandler, 2000);
     } else {
-      console.log('Database connection successful!')
+      console.log("Database connection successful!");
     }
-  });   
+  });
 
-  connection.on('error', function(error) {
-    console.log('DB error:', error);
-    if(error.code === 'PROTOCOL_CONNECTION_LOST') {
+  connection.on("error", function (error) {
+    console.log("DB error:", error);
+    if (error.code === "PROTOCOL_CONNECTION_LOST") {
       dbConnectionHandler();
-    } else {                
-      throw err;                            
+    } else {
+      throw err;
     }
-  })
+  });
 }
 dbConnectionHandler();
 
-const bot = new Telegraf("1820848598:AAFodpdUPNFB3fT2rDZkGrkuDcPu7Ax-QGo");
+const bot = new Telegraf("KEY");
 
 bot.on("text", (ctx) => {
   let chatId = ctx.message.chat.id;
